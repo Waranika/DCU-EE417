@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+body {
+			background-color: #707c8c; 
+			font-family: Arial, sans-serif;
+			margin: 0;
+            padding: 0;
+        }
+
+header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: right;
+}
+header a {
+            color: #fff;
+            margin-left: 20px;
+            text-decoration: none;
+        }
+
+
+h1 {
+	font-family: arial, sans-serif;
+}
+
+td, th {
+  border: 1px solid #000000;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.header-row td {
+  text-align: center;
+  font-weight: bold;
+}
+
+.image-container {
+  text-align: center; 
+}
+.image-container img {
+            width: 150px; 
+            height: 150px;
+            object-fit: cover;
+			img-align: center;
+            border-radius: 50%; 
+            margin: 10px;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+	<a href="Main.html">MAIN</a>
+    <a href="Welcome.html">PROFILE</a>
+    <a href="Settings.html">SETTINGS</a>
+	<a href="index.html">LOGOUT</a>
+</header>
+
+
+<h1>Player stat</h1>
+
+<div class="image-container">
+    <img id="playerImage" alt="Player Image">
+</div>
+
+<table id="playerTable">
+  <tr class="header-row">
+    <td colspan="2" id="playerName"></td>
+  </tr>
+  <tr>
+    <td>Age</td>
+    <td id="age"></td>
+  </tr>
+  <tr>
+    <td>Position</td>
+    <td id="position"></td>
+  </tr>
+  <tr>
+    <td>Height</td>
+    <td id="height"></td>
+  </tr>
+  <tr>
+    <td>Weight</td>
+    <td id="weight"></td>
+  </tr>
+  <tr>
+    <td>Nationality</td>
+    <td id="nationality"></td>
+  </tr>
+</table>
+	
+<script>
+window.onload = function() {
+    // Get the parameter value from the URL
+    var urlParams = new URLSearchParams(window.location.search);
+    var key = urlParams.get('param');
+
+    // Retrieve data from local storage using the key
+    var formData = parseFormData(localStorage.getItem(key));
+
+    // Populate the table with retrieved data
+    
+    document.getElementById('playerName').textContent = formData.firstName + " " + formData.lastName;
+    document.getElementById('age').textContent = formData.age;
+    document.getElementById('position').textContent = formData.position;
+    document.getElementById('height').textContent = formData.height + " cm";
+    document.getElementById('weight').textContent = formData.weight + " kg";
+    document.getElementById('nationality').textContent = formData.nationality;
+	
+	
+	// Check if picture is empty, set default image if true
+    if (formData.picture === "") {
+        document.getElementById('playerImage').src = "Images/default.webp";
+    } else {
+        document.getElementById('playerImage').src = "Images/" + formData.picture;
+    }
+};
+
+// Function to parse the formData string into an object
+function parseFormData(formDataString) {
+    var parser = new DOMParser();
+    var xmlDoc = parser.parseFromString(formDataString, "text/xml");
+    var formData = {};
+    var elements = xmlDoc.getElementsByTagName("formData")[0].children;
+    for (var i = 0; i < elements.length; i++) {
+        var element = elements[i];
+        formData[element.tagName] = element.textContent;
+    }
+    return formData;
+}
+</script>
+
+
+</body>
+</html>
+

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0px;
+        }
+		
+		header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .menu-bar {
+            display: flex;
+            align-items: center;
+        }
+
+        header .menu-bar a, .dropbtn {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            background-color: #333;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #f1f1f1}
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+
+        .search-box {
+            margin-left: 10px;
+            padding: 5px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+        .search-box input[type="text"] {
+            border: none;
+            padding: 5px;
+            width: 150px;
+        }
+
+        .search-box input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="file"] {
+            margin-top: 5px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+		
+		.image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .image-container img {
+            width: 150px; 
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%; 
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="menu-bar">
+    </div>
+    <div>
+        <a href="Main.html">MAIN</a>
+        <a href="Welcome.html">NEWS</a>
+        <!-- Dropdown Menu for Settings -->
+        <div class="dropdown">
+            <a href="Settings.html" class="dropbtn">SETTINGS</a>
+            <div class="dropdown-content">
+                <a href="ModifAccount.html">Modify Account</a>
+                <a href="MyAcc.html">My Account</a>
+            </div>
+        </div>
+        <a href="index.html">LOGOUT</a>
+    </div>
+</header>
+
+
+
+<h1>Add Player</h1>
+
+<div class="image-container">
+    <img src="Images/default.webp" alt="default">
+</div>
+
+
+<form id="addPlayerForm" action="#" method="post" enctype="multipart/form-data">
+	
+	
+
+    <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+    </div>
+    <div class="form-group">
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" min="18" max="50" required>
+    </div>
+    <div class="form-group">
+        <label for="position">Position:</label>
+        <select id="position" name="position" required>
+            <option value="">Select Position</option>
+            <option value="Forward">Forward</option>
+            <option value="Midfielder">Midfielder</option>
+            <option value="Defender">Defender</option>
+            <option value="Goalkeeper">Goalkeeper</option>
+        </select>
+    </div>
+	
+    <div class="form-group">
+        <label for="height">Height (in cm):</label>
+        <input type="number" id="height" name="height" min="100" max="250" required>
+    </div>
+    <div class="form-group">
+        <label for="weight">Weight (in kg):</label>
+        <input type="number" id="weight" name="weight" min="40" max="200" required>
+    </div>
+    <div class="form-group">
+        <label for="nationality">Nationality:</label>
+        <input type="text" id="nationality" name="nationality" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" ></textarea>
+    </div>
+    <div class="form-group">
+        <label for="picture">Player Picture:</label>
+        <input type="file" id="picture" name="picture" accept="image/*" >
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Add Player">
+    </div>
+</form>
+
+
+<script>
+	
+
+	document.getElementById("picture").addEventListener("change", function(event) {
+        var file = event.target.files[0];
+
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var imageContainer = document.querySelector('.image-container');
+                var imageElement = imageContainer.querySelector('img');
+                imageElement.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+	
+    document.getElementById("addPlayerForm").addEventListener("submit", function(event) {
+        var age = document.getElementById("age").value;
+        var height = document.getElementById("height").value;
+        var weight = document.getElementById("weight").value;
+
+        if (age < 18 || age > 50) {
+            alert("Age must be between 18 and 50.");
+            event.preventDefault();
+        }
+
+        if (height < 100 || height > 250) {
+            alert("Height must be between 100cm and 250cm.");
+            event.preventDefault();
+        }
+
+        if (weight < 40 || weight > 200) {
+            alert("Weight must be between 40kg and 200kg.");
+            event.preventDefault();
+        }
+    });
+	
+	
+	document.getElementById("addPlayerForm").addEventListener("submit", function(event) {
+    // Prevent the default form submission
+    event.preventDefault();
+
+    // Get the value of the first name input
+    var firstName = document.getElementById("firstName").value;
+
+    // Create XML representation of form data
+    var xmlString = '<formData>';
+    var inputs = this.querySelectorAll("input, select, textarea");
+    inputs.forEach(function(input) {
+        xmlString += '<' + input.name + '>' + input.value + '</' + input.name + '>';
+    });
+    xmlString += '</formData>';
+
+    // Store XML string in local storage with the first name as the key
+    localStorage.setItem(firstName, xmlString);
+
+    // Optionally, clear the form inputs
+    inputs.forEach(function(input) {
+        input.value = ''; // Clear input values
+    });
+
+    // Optionally, display a message indicating successful storage
+    alert("Form data stored locally in XML format with key '" + firstName + "'.");
+	});
+
+	document.addEventListener('DOMContentLoaded', function() {
+    // Select all the links within the <header>
+    var links = document.querySelectorAll('header div a');
+
+    // Add event listeners for each link
+    links.forEach(function(link) {
+        link.addEventListener('mouseenter', function() {
+            this.style.backgroundColor = 'white';
+            this.style.color = 'black'; // Change text color if needed
+            // Increase padding or margin for a larger hover effect
+            this.style.padding = '20px 20px'; // Adjust values as needed
+            this.style.margin = '0 5px'; // Adjust values as needed
+        });
+
+        link.addEventListener('mouseleave', function() {
+            this.style.backgroundColor = '';
+            this.style.color = ''; // Reset text color if changed
+            // Reset padding or margin
+            this.style.padding = '10px 15px'; // Reset to original values
+            this.style.margin = '0'; // Reset to original values
+        });
+    });
+});
+	
+</script>
+
+</body>
+</html>

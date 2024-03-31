@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #dddddd; 
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .menu-bar {
+            display: flex;
+            align-items: center;
+        }
+
+        header .menu-bar a, .dropbtn {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            background-color: #333;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #f1f1f1}
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .settings-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff; 
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="menu-bar">
+
+    </div>
+    <div>
+        <a href="Main.html">MAIN</a>
+        <a href="Welcome.html">NEWS</a>
+        <div class="dropdown">
+            <a href="Settings.html" class="dropbtn">SETTINGS</a>
+            <div class="dropdown-content">
+                <a href="ModifAccount.html">Modify Account</a>
+                <a href="MyAcc.html">My Account</a>
+            </div>
+        </div>
+        <a href="index.html">LOGOUT</a>
+    </div>
+</header>
+
+
+<div class="settings-container">
+    <h1>Settings</h1>
+    <form>
+        <label for="notifications">Notifications:</label>
+        <select id="notifications" name="notifications">
+            <option value="1">Enabled</option>
+            <option value="0">Disabled</option>
+        </select>
+
+        <label for="theme">Theme:</label>
+        <select id="theme" name="theme">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+        </select>
+
+        <input type="submit" value="Save Changes">
+    </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Select all the links within the <header>
+    var links = document.querySelectorAll('header div a');
+
+    // Add event listeners for each link
+    links.forEach(function(link) {
+        link.addEventListener('mouseenter', function() {
+            this.style.backgroundColor = 'white';
+            this.style.color = 'black'; // Change text color if needed
+            // Increase padding or margin for a larger hover effect
+            this.style.padding = '25px 20px'; // Adjust values as needed
+            this.style.margin = '0 5px'; // Adjust values as needed
+        });
+
+        link.addEventListener('mouseleave', function() {
+            this.style.backgroundColor = '';
+            this.style.color = ''; // Reset text color if changed
+            // Reset padding or margin
+            this.style.padding = '10px 15px'; // Reset to original values
+            this.style.margin = '0'; // Reset to original values
+        });
+    });
+});
+</script>
+</body>
+</html>

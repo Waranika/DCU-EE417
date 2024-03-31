@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #dddddd; 
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: right;
+        }
+
+        header a {
+            color: #fff;
+            margin-left: 20px;
+            text-decoration: none;
+        }
+
+        .settings-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff; 
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+	<a href="Main.html">MAIN</a>
+    <a href="Profile.html">PROFILE</a>
+    <a href="Settings.html">SETTINGS</a>
+	<a href="index.html">LOGOUT</a>
+</header>
+
+<div class="settings-container">
+    <h1>Settings</h1>
+    <form>
+        <label for="notifications">Notifications:</label>
+        <select id="notifications" name="notifications">
+            <option value="1">Enabled</option>
+            <option value="0">Disabled</option>
+        </select>
+
+        <label for="theme">Theme:</label>
+        <select id="theme" name="theme">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+        </select>
+
+        <input type="submit" value="Save Changes">
+    </form>
+</div>
+
+</body>
+</html>

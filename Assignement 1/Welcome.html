@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamTeam Welcome Page</title>
+	<link rel="stylesheet" href="Stylesheets/Welcome.css">
+</head>
+<body>
+
+<header>
+    <div class="menu-bar">
+
+    </div>
+    <div>
+        <a href="Main.html">MAIN</a>
+        <a href="Welcome.html">NEWS</a>
+        <div class="dropdown">
+            <a href="Settings.html" class="dropbtn">SETTINGS</a>
+            <div class="dropdown-content">
+                <a href="ModifAccount.html">Modify Account</a>
+                <a href="MyAcc.html">My Account</a>
+            </div>
+        </div>
+        <a href="index.html">LOGOUT</a>
+    </div>
+</header>
+
+
+<div class="container">
+    <div id="slideshow" class="slideshow">
+
+        <span class="nav-btn" id="prevSlide">&#10094;</span>
+        <span class="nav-btn" id="nextSlide">&#10095;</span>
+        
+		<div class="slide-container">
+			<div class="slide player-of-the-week">
+				<h2>Player of the Week</h2>
+				<img src="Images/711.webp" alt="Player of the Week">
+				<p>Name: Lionel Messi</p>
+				<p>Team: Paris Saint-Germain</p>
+				<p>Position: Forward</p>
+				<p>Achievements: Scored 3 goals in the last match, leading PSG to victory.</p>
+			</div>
+			
+			<div class="slide worst-player" >
+				<h2>Worst Player of the Week</h2>
+				<img src="Images/885.webp" alt="Worst Player of the Week">
+				<p>Name: Christiano Ronaldo</p>
+				<p>Team: Al Nasser</p>
+				<p>Position: Forward</p>
+				<p>Details: No goal in the last season</p>
+			</div>
+        </div>
+    </div>
+</div>
+
+<div class="player-market-news">
+    <h2>Player Market News</h2>
+    <div class="news-item">
+        <p class="news-title">Cristiano Ronaldo Transfers to Manchester United</p>
+        <p class="news-description">In a surprising move, Cristiano Ronaldo returns to Manchester United, promising an exciting season ahead.</p>
+    </div>
+    <div class="news-item">
+        <p class="news-title">Neymar Jr. Extends Contract with PSG Until 2025</p>
+        <p class="news-description">Neymar Jr. commits to Paris Saint-Germain for four more years, aiming for Champions League success.</p>
+    </div>
+    <div class="news-item">
+        <p class="news-title">Kylian Mbappé Speculated to Join Real Madrid</p>
+        <p class="news-description">Rumors are swirling about Kylian Mbappé's potential transfer to Real Madrid in the upcoming transfer window.</p>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const slideContainer = document.querySelector('.slide-container');
+    const slides = document.querySelectorAll('.slide');
+    let currentIndex = 0;
+    const changeInterval = 3000; // Interval for automatic slide change
+
+    function updateSlidePosition() {
+        const slideWidth = slides[0].clientWidth;
+        const newTransformValue = -slideWidth * currentIndex;
+        slideContainer.style.transform = `translateX(${newTransformValue}px)`;
+    }
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % slides.length; // Move to the next slide, loop back if at the end
+        updateSlidePosition();
+    }
+
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length; // Move to the previous slide, loop to the end if at the beginning
+        updateSlidePosition();
+    }
+
+    // Set event listeners for next and previous slide buttons
+    document.getElementById('nextSlide').addEventListener('click', nextSlide);
+    document.getElementById('prevSlide').addEventListener('click', prevSlide);
+
+    // Initialize the slideshow position
+    updateSlidePosition();
+
+    // Automatically change slides at set intervals
+    let autoSlideInterval = setInterval(nextSlide, changeInterval);
+
+    // Function to reset the automatic slide change interval
+    function resetAutoSlide() {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = setInterval(nextSlide, changeInterval);
+    }
+
+    // Reset automatic slide change on manual navigation
+    document.getElementById('nextSlide').addEventListener('click', resetAutoSlide);
+    document.getElementById('prevSlide').addEventListener('click', resetAutoSlide);
+});
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Select all the links within the <header>
+    var links = document.querySelectorAll('header div a');
+
+    // Add event listeners for each link
+    links.forEach(function(link) {
+        link.addEventListener('mouseenter', function() {
+            this.style.backgroundColor = 'white';
+            this.style.color = 'black'; // Change text color if needed
+            // Increase padding or margin for a larger hover effect
+            this.style.padding = '25px 20px'; // Adjust values as needed
+            this.style.margin = '0 5px'; // Adjust values as needed
+        });
+
+        link.addEventListener('mouseleave', function() {
+            this.style.backgroundColor = '';
+            this.style.color = ''; // Reset text color if changed
+            // Reset padding or margin
+            this.style.padding = '10px 15px'; // Reset to original values
+            this.style.margin = '0'; // Reset to original values
+        });
+    });
+});
+</script>
+
+
+</body>
+</html>

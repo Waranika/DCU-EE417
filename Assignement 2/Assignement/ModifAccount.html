@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modify Account - DreamTeam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #dddddd; 
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .menu-bar {
+            display: flex;
+            align-items: center;
+        }
+
+        header .menu-bar a, .dropbtn {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            background-color: #333;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #f1f1f1}
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .search-box {
+            margin-left: 10px;
+            padding: 5px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+        .search-box input[type="text"], .search-box input[type="submit"] {
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .search-box input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        /* Additional styles for the form and button, similar to previous modifications */
+        form {
+            background: white;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        label, input[type="button"], input[type="text"], input[type="email"], input[type="password"], input[type="tel"], input[type="date"], select, textarea {
+            display: block;
+            margin: 10px 0 5px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input[type="file"], input[type="checkbox"], .dropdown, .dropdown-content {
+            margin-bottom: 20px;
+        }
+
+        input[type="button"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        input[type="button"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="menu-bar">
+
+    </div>
+    <div>
+        <a href="Main.html">MAIN</a>
+        <a href="Welcome.html">NEWS</a>
+        <div class="dropdown">
+            <a href="Settings.html" class="dropbtn">SETTINGS</a>
+            <div class="dropdown-content">
+                <a href="ModifAccount.html">Modify Account</a>
+                <a href="MyAcc.html">My Account</a>
+            </div>
+        </div>
+        <a href="index.html">LOGOUT</a>
+    </div>
+</header>
+
+<h2>Modify Account Details</h2>
+
+<form id="accountForm">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username">
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email">
+    
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+    
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" name="phone">
+    
+    <label for="fullname">Full Name:</label>
+    <input type="text" id="fullname" name="fullname">
+    
+    <label for="address">Address:</label>
+    <textarea id="address" name="address"></textarea>
+    
+    <label for="profilePic">Profile Picture:</label>
+    <input type="file" id="profilePic" name="profilePic" accept="image/*">
+    
+    <label for="twoFactorAuth">Enable Two-Factor Authentication:</label>
+    <input type="checkbox" id="twoFactorAuth" name="twoFactorAuth">
+    
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" name="dob">
+    
+    <label for="preferredLanguage">Preferred Language:</label>
+    <select id="preferredLanguage" name="preferredLanguage">
+        <option value="English">English</option>
+        <option value="Spanish">Spanish</option>
+        <option value="French">French</option>
+        <option value="German">German</option>
+        <option value="Chinese">Chinese</option>
+    </select>
+    
+    <input type="button" value="Save Details" onclick="saveDetails()">   
+</form> 
+
+<script>
+function saveDetails() {
+    // Get the values from the form
+    var username = document.getElementById("username").value;
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    var phone = document.getElementById("phone").value;
+    var fullname = document.getElementById("fullname").value;
+    var address = document.getElementById("address").value;
+    var twoFactorAuth = document.getElementById("twoFactorAuth").checked;
+    var dob = document.getElementById("dob").value;
+    var preferredLanguage = document.getElementById("preferredLanguage").value;
+
+    // Save the values in localStorage
+    localStorage.setItem("username", username);
+    localStorage.setItem("email", email);
+    localStorage.setItem("password", password);
+    localStorage.setItem("phone", phone);
+    localStorage.setItem("fullname", fullname);
+    localStorage.setItem("address", address);
+    localStorage.setItem("twoFactorAuth", twoFactorAuth);
+    localStorage.setItem("dob", dob);
+    localStorage.setItem("preferredLanguage", preferredLanguage);
+
+    // Optional: Alert the user that the details have been saved
+    alert("Your details have been saved successfully.");
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Select all the links within the <header>
+    var links = document.querySelectorAll('header div a');
+
+    // Add event listeners for each link
+    links.forEach(function(link) {
+        link.addEventListener('mouseenter', function() {
+            this.style.backgroundColor = 'white';
+            this.style.color = 'black'; // Change text color if needed
+            // Increase padding or margin for a larger hover effect
+            this.style.padding = '30px 20px'; // Adjust values as needed
+            this.style.margin = '0 5px'; // Adjust values as needed
+        });
+
+        link.addEventListener('mouseleave', function() {
+            this.style.backgroundColor = '';
+            this.style.color = ''; // Reset text color if changed
+            // Reset padding or margin
+            this.style.padding = '10px 15px'; // Reset to original values
+            this.style.margin = '0'; // Reset to original values
+        });
+    });
+});
+</script>
+
+</body>
+</html>
