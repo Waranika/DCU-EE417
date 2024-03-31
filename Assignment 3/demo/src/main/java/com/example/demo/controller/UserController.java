@@ -1,6 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.User;
+import java.util.ArrayList;
+import java.util.List;
+import java.nio.file.Files;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.example.demo.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -64,20 +69,31 @@ public class UserController {
     }
     
     
-    private void saveUserDataToJsonFile(User user) {
+    private void saveUserDataToJsonFile(User newUser) {
         try {
-        	 // Define the path where you want to save the file
-        	String downloadsPath = System.getProperty("user.home") + "\\eclipse-workspace\\demo\\demo\\src\\main\\resources";
-        	
-            // Generating a unique file name using the type and current timestamp
-            String fileName =  "User_" + DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(LocalDateTime.now()) + ".json";
-            
-            File file = Paths.get(downloadsPath, fileName).toFile();
-            
-         // Write the User object as JSON to the file
-            objectMapper.writeValue(file, user);
-            System.out.println("Saved player data to " + file.getAbsolutePath());
-            
+            // Define the path where you want to save the file
+            String resourcesPath = System.getProperty("user.home") + "\\eclipse-workspace\\demo\\demo\\src\\main\\resources";
+            String fileName = "users.json"; // A single file for all users
+            File file = Paths.get(resourcesPath, fileName).toFile();
+
+            // List to hold users
+            List<User> users = new ArrayList<>();
+
+            // Check if the file already exists and has content
+            if (file.exists() && file.length() > 0) {
+                // Read the existing content and convert back to list of User
+                String content = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
+                User[] usersArray = objectMapper.readValue(content, User[].class); // Convert JSON array to User array
+                users.addAll(Arrays.asList(usersArray)); // Add all existing users to list
+            }
+
+            // Add the new user to the list
+            users.add(newUser);
+
+            // Write the updated users list back to the file
+            objectMapper.writeValue(file, users);
+            System.out.println("Saved user data to " + file.getAbsolutePath());
+
         } catch (IOException e) {
             e.printStackTrace();
         }
