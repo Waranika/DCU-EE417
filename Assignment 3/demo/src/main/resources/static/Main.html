@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>DreamTeam</title>
+	<link rel="stylesheet" href="Stylesheets/Main.css">
+</head>
+<body>
+
+<header>
+    <div class="menu-bar">
+        <div class="search-box">
+		<form action="search_results.html" method="get">
+			<input type="text" name="search" placeholder="Search" id="search-input">
+			<input type="submit" value="Search">
+		</form>
+		<div 
+			id="search-suggestion-box" style="background-color: white; display: none;">
+		</div>
+	</div>
+    </div>
+    <div>
+        <a href="Main.html">MAIN</a>
+        <a href="Welcome.html">NEWS</a>
+        <!-- Dropdown Menu for Settings -->
+        <div class="dropdown">
+            <a href="Settings.html" class="dropbtn">SETTINGS</a>
+            <div class="dropdown-content">
+                <a href="ModifAccount.html">Modify Account</a>
+                <a href="MyAcc.html">My Account</a>
+            </div>
+        </div>
+        <a href="index.html">LOGOUT</a>
+    </div>
+</header>
+
+
+ <div class="image-container" id="image-container">
+ </div>
+    
+    
+
+
+
+<a href="AddPlayer.html">
+	<button class="add-player-button">Add Player</button>
+</a>
+
+<script>
+
+
+// XML data
+    var xmlData = "<formData><firstName>Lionel Andrès</firstName>\
+    <lastName>Messi</lastName>\
+    <age>34</age>\
+    <position>BU</position>\
+    <height>170</height>\
+    <weight>72</weight>\
+    <nationality>Argentina</nationality>\
+    <description>\
+        Origin: Argentina\
+        Played for: FCB\
+        IB\
+        Position: BU\
+        Number of goals: 821 (#2)\
+        Number of Golden Balls: 8\
+    </description>\
+    <picture>711.webp</picture></formData>";
+	
+	// Store XML data in local storage
+    localStorage.setItem("Messi", xmlData);
+	
+	var xmlData2 = '<formData>\
+    <firstName>Cristiano </firstName>\
+    <lastName>Ronaldo</lastName>\
+    <age>37</age>\
+    <position>BU</position>\
+    <height>187</height>\
+    <weight>83</weight>\
+    <nationality>Portugal</nationality>\
+    <description>\
+        Origin: Portugal\
+        Played for: MCU, RM, JUV, AN\
+        Position: BU\
+        Number of goals: 873 (#2)\
+        Number of Golden Balls: 5\
+    </description>\
+    <picture>885.webp</picture>\
+</formData>';
+	
+	// Store XML data in local storage
+    localStorage.setItem("Ronaldo", xmlData2);
+	
+	
+document.addEventListener("DOMContentLoaded", function() {
+
+	
+    if (typeof(Storage) !== "undefined") {
+        // Get the number of items in local storage
+        var storageLength = localStorage.length;
+
+        // Iterate over each item
+        for (var i = 0; i < storageLength; i++) {
+            // Get the key of the current item
+            var key = localStorage.key(i);
+            
+            // Get the value associated with the key
+            var value = localStorage.getItem(key);
+            
+            // Check if the value starts with "<formData>"
+            if (value.startsWith("<formData>")) {
+                // Parse the value as XML or HTML
+                var parser = new DOMParser();
+                var xmlDoc = parser.parseFromString(value, "text/xml");
+                
+                // Get the content within the <picture> tag
+                var pictureContent = xmlDoc.getElementsByTagName("picture")[0].textContent;
+                
+                // Check if there is content within <picture></picture>
+                if (pictureContent.trim() === "") {
+                    // If there is no content, add an image with default source
+                    var imageContainer = document.getElementsByClassName("image-container")[0];
+                    var defaultImageLink = document.createElement("a");
+                    defaultImageLink.href = "PlayerSheet.html" + "?param=" + key; // Replace "your_link_here" with the desired link
+                    var defaultImage = document.createElement("img");
+                    defaultImage.src = "Images/default.webp";
+                    defaultImageLink.appendChild(defaultImage);
+                    imageContainer.appendChild(defaultImageLink);
+					
+					
+				
+                } else {
+                    var imageContainer = document.getElementsByClassName("image-container")[0];
+					var imageLink = document.createElement("a");
+					imageLink.href = "PlayerSheet.html" + "?param=" + key;; // Replace "PlayerSheet.html" with the desired link
+					var image = document.createElement("img");
+					
+					// Extracting only the filename from the local file path
+					var filename = pictureContent.split("\\").pop(); // Assuming "\\" is the separator for Windows paths
+					// Concatenate with the desired relative path
+					var imagePath = "Images/" + filename;
+					
+					image.src = imagePath; // Use the concatenated path as the image source
+					image.alt = key; // Assuming key can be used as the alt text
+					imageLink.appendChild(image);
+					imageContainer.appendChild(imageLink);
+					
+					
+				
+					}
+            }
+        }
+    } else {
+        console.log("Local storage is not supported in this browser.");
+    }
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Select all the links within the <header>
+    var links = document.querySelectorAll('header div a');
+
+    // Add event listeners for each link
+    links.forEach(function(link) {
+        link.addEventListener('mouseenter', function() {
+            this.style.backgroundColor = 'white';
+            this.style.color = 'black'; // Change text color if needed
+            // Increase padding or margin for a larger hover effect
+            this.style.padding = '20px 20px'; // Adjust values as needed
+            this.style.margin = '0 5px'; // Adjust values as needed
+        });
+
+        link.addEventListener('mouseleave', function() {
+            this.style.backgroundColor = '';
+            this.style.color = ''; // Reset text color if changed
+            // Reset padding or margin
+            this.style.padding = '10px 15px'; // Reset to original values
+            this.style.margin = '0'; // Reset to original values
+        });
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    var searchInput = document.getElementById("search-input");
+    var suggestionBox = document.getElementById("search-suggestion-box");
+
+    // Function to show suggestions
+	function showSuggestions(inputValue) {
+    // Clear previous suggestions
+    suggestionBox.innerHTML = '';
+    suggestionBox.style.display = 'none'; // Hide suggestions box by default
+
+    if (inputValue.trim() === '') {
+        return; // Exit if input is empty
+    }
+
+    var suggestionsFound = false;
+
+    // Iterate over all items in localStorage
+    for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        var xmlString = localStorage.getItem(key);
+
+        // Process only player data
+        if (xmlString.startsWith("<formData>")) {
+            var parser = new DOMParser();
+            var xmlDoc = parser.parseFromString(xmlString, "text/xml");
+
+            // Safely accessing elements
+            var firstNameElement = xmlDoc.getElementsByTagName("firstName")[0];
+            var lastNameElement = xmlDoc.getElementsByTagName("lastName")[0];
+            if (firstNameElement && lastNameElement) {
+                var fullName = firstNameElement.textContent + " " + lastNameElement.textContent;
+
+                if (fullName.toLowerCase().includes(inputValue.toLowerCase())) {
+					suggestionsFound = true;
+
+					var suggestion = document.createElement("div");
+					suggestion.className = 'suggestion';
+					suggestion.textContent = fullName;
+
+					// Capture the current last name in a variable for use in the closure
+					let currentLastName = lastNameElement.textContent;
+
+					suggestion.addEventListener('click', function() {
+						// Use the captured last name for the URL
+						window.location.href = 'PlayerSheet.html?param=' + encodeURIComponent(currentLastName);
+					});
+
+					suggestionBox.appendChild(suggestion);
+				}
+            }
+        }
+    }
+
+    // Show suggestion box if suggestions were found
+    if (suggestionsFound) {
+        suggestionBox.style.display = 'block';
+    }
+}
+
+    // Attach event listener to search input for input events
+    searchInput.addEventListener('input', function() {
+        showSuggestions(this.value);
+    });
+});
+
+</script>
+
+</body>
+</html>

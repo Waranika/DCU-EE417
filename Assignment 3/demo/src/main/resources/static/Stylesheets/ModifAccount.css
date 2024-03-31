@@ -1,0 +1,110 @@
+body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #dddddd; 
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .menu-bar {
+            display: flex;
+            align-items: center;
+        }
+
+        header .menu-bar a, .dropbtn {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            background-color: #333;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #f1f1f1}
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .search-box {
+            margin-left: 10px;
+            padding: 5px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+        .search-box input[type="text"], .search-box input[type="submit"] {
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .search-box input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        /* Additional styles for the form and button, similar to previous modifications */
+        form {
+            background: white;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        label, input[type="button"], input[type="text"], input[type="email"], input[type="password"], input[type="tel"], input[type="date"], select, textarea {
+            display: block;
+            margin: 10px 0 5px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input[type="file"], input[type="checkbox"], .dropdown, .dropdown-content {
+            margin-bottom: 20px;
+        }
+
+        input[type="button"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        input[type="button"]:hover {
+            background-color: #45a049;
+        }
